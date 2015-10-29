@@ -18,12 +18,24 @@ class PhotosController < ApplicationController
     p.caption = params[:the_caption]
     p.source = params[:the_source]
     p.save
-    redirect_to("localhost:3000/photos")
+    redirect_to("http://localhost:3000")
   end
 
   def delete_photo
-    @delete = Photo.find_by({ :id => params[:id]})
-    @delete.destroy
-    redirect_to("localhost:3000/photos")
+    delete = Photo.find_by({ :id => params[:id]})
+    delete.destroy
+    delete.save
+  end
+
+  def edit_form
+    @edit = Photo.find_by({ :id => params[:id]})
+  end
+
+  def update_row
+    @edit = Photo.find_by({ :id => params[:id]})
+    @edit.caption = params[:the_caption]
+    @edit.source = params[:the_source]
+    @edit.save
+    redirect_to("http://localhost:3000/photos")
   end
 end
